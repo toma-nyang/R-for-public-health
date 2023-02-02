@@ -1,14 +1,6 @@
 COPD <- read.csv(file = "C:/Users/ksj10/Desktop/R/data/COPD_student_dataset.csv",
                  header=TRUE, sep=',')
 
-install.packages(
-  "rsthemes",
-  repos = c(gadenbuie = 'https://gadenbuie.r-universe.dev', getOption("repos"))
-)
-#install.packages("devtools")
-devtools::install_github("gadenbuie/rsthemes")
-rsthemes::install_rsthemes()
-rsthemes::install_rsthemes(include_base16 = TRUE)
 
 #FEV1 = Forced Expiratory volume at 1 : 억지로 숨을 강하게 뱉을때 1초간 호기량, 폐쇄성 폐질환에서는 나가는 통로가 좁아져 있으므로 FEV1이 감소하게 됨.
 #MWT1= waking distance , 6분 걷기 거리 !!
