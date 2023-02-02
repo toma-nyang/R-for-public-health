@@ -26,3 +26,19 @@ plot(COPD$FEV1,COPD$MWT1Best,xlab="FEV1",ylab="MWT1Best")
 #상관관계
 cor.test(COPD$FEV1, COPD$MWT1Best, use="complete.obs", method="pearson")
 cor.test(COPD$FEV1, COPD$MWT1Best, use="complete.obs", method="spearman")
+
+#new vector name<-linear regression model
+#lm(outcome~predict,data=dataframe)
+
+MWT1Best_FEV1<-lm(MWT1Best~FEV1,data=COPD)
+summary(MWT1Best_FEV1)
+
+#TO View 95% confidence interval
+confint(MWT1Best_FEV1)
+
+par(mfrow=c(2,2))
+par(mfrow=c(1,1))
+
+
+#multiple regression in R
+
