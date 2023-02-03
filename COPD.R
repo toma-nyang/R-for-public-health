@@ -39,6 +39,62 @@ confint(MWT1Best_FEV1)
 par(mfrow=c(2,2))
 par(mfrow=c(1,1))
 
-
 #multiple regression in R
+#Model name<-lm(outcome~predictor1+predictor2,data=dataframe)
+# #Y = α + β1*X1 + β2*X2 + ε
+# Y = 결과(즉, 종속) 변수.
+# 
+# X1 = 첫 번째 예측(즉, 독립) 변수.
+# 
+# X2 = 두 번째 예측 변수(즉, 독립) 변수.
+# 
+# α = 절편(X1=X2=0일 때 평균 Y). 참고: α는 단위에 따라 다릅니다.
+# 
+# β1 = 선의 기울기(X2가 일정하게 유지될 때 X1이 1 단위 증가할 때 Y의 변화). 참고: β1은 단위에 따라 다릅니다.
+# 
+# Β2 = 선의 기울기(X1이 일정하게 유지될 때 X2에서 1 단위 증가에 대한 Y의 변화). 참고: β2는 단위에 따라 다릅니다.
+# 
+# ε는 Y의 임의 변동, 즉 잔차입니다.
+
+
+MWT1Best_FEV1_AGE<-lm(MWT1Best~FEV1+AGE,data=COPD)
+summary(MWT1Best_FEV1_AGE)
+confint(MWT1Best_FEV1_AGE)
+par(mfrow=c(2,2))
+plot(MWT1Best_FEV1_AGE)
+
+#Linear regression model 만들기 전에 step !
+# 1.Inspect the dataset for missing values and outliers
+
+#missing value 확인
+install.packages("psych")
+library(psych)
+describe(COPD)
+
+install.packages("gmodels")
+library(gmodels)
+CrossTable(COPD$copd)
+
+sum(is.na(COPD$copd))
+summary(COPD$MWT1Best)
+
+#outlier 확인
+hist(COPD$AGE)
+
+
+#  2. Examine the relationship between your candidate predictor variables 
+
+#Continuous variable
+#Correlation Matrix --
+my_data <- COPD[,c("AGE","PackHistory","FEV1","FEV1PRED","FVC","CAT","HAD","SGRQ")]
+  #Create a new vector including the variables to be analysed
+cor_matrix <- cor(my_data) #Create a correlation matrix of the variable that are to be analysed
+
+cor_matrix #View the correlation matrix
+round(cor_matrix,2) #Round the values of the correlation matrix to 2 decimal points(소수점 둘쨰자리까지 반올림!). 
+
+pairs(~AGE+PackHistory+FEV1+FEV1PRED+FVC+CAT+HAD+SGRQ, data=COPD) #Command to produce the correlation plot
+
+#Categorical variable
+CrossTable(COPD$hypertension, COPD$IHD)
 
